@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"  
+Description: EC2 template
+#ec2インスタンス作成
+Resources:  
+  NewKeyPair:
+        Type: AWS::EC2::KeyPair
+        Properties:
+            KeyName: newkey
+  WebInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: ap-northeast-1a
+      InstanceType: t2.micro
+      ImageId: ami-06ee4e2261a4dc5c3
+      KeyName: !Ref NewKeyPair 
+      SecurityGroupIds:
+        - !ImportValue cloudformationSGEC2
+      SubnetId: !ImportValue cloudformation-EC2publicSubnet1-id
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeType: "gp2"
+            VolumeSize: 8
+            Encrypted: true
+      Tags:
+      - Key: Name
+        Value: cloudformationEC2
+#出力
+Outputs:
+    StackEC2:
+        Description: EC2 ID
+        Value: !Ref WebInstance
+        Export:
+            Name: !Sub "Cloudformation-EC2ID"
+

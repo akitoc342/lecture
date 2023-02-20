@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: RDS template
+#ＤＢパスワード
+Parameters:
+    DBMasterUserPassword:
+        Default: aki33659
+        Type: String
+Resources:
+#サブネットグループ作成
+  RDSSubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties:
+      DBSubnetGroupDescription: "dedicated to cloudformationRDS"
+      DBSubnetGroupName: "ut_dbsubnet"
+      SubnetIds:
+      - !ImportValue cloudformation-EC2privateSubnet1-id
+      - !ImportValue cloudformation-EC2privateSubnet2-id
+      Tags:
+      - Key: "Name"
+        Value: "ut_dbsubnet"
+#RDSインスタンス作成
+  RDSInstance:
+    Type: "AWS::RDS::DBInstance"
+    Properties:
+      DBInstanceIdentifier: "cloudformationRDS"
+      DBInstanceClass: "db.t2.micro"
+      Engine: "mysql"
+      EngineVersion: "8.0.28"
+      MasterUsername: "admin"
+      MasterUserPassword: !Ref 'DBMasterUserPassword'
+      DBName: "cloudformationRDS"
+      BackupRetentionPeriod: 1
+      MultiAZ: false
+      PubliclyAccessible: false
+      StorageType: "gp2"
+      AllocatedStorage: 20
+      StorageEncrypted: false
+      CopyTagsToSnapshot: true
+      DeletionProtection: false 
+      DeleteAutomatedBackups: true
+      DBSubnetGroupName: !Ref RDSSubnetGroup
+      VPCSecurityGroups:
+      - !ImportValue cloudformationSGRDS
+      Tags:
+      - Key: "Name"
+        Value: "cloudformation-RDS"
