@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: SG template
+Resources:
+#EC2セキュリティグループの作成
+  cloudformationSGEC2:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: cloudformationSGEC2
+      GroupDescription: cloudformationSGEC2
+      VpcId: !ImportValue cloudformation-EC2VPC-id
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: cloudformationSGEC2
+#ALBセキュリティグループの作成
+  cloudformationSGALB:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: cloudformationSGALB
+      GroupDescription: cloudformationSGALB
+      VpcId: !ImportValue cloudformation-EC2VPC-id
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: cloudformationSGALB
+#RDSセキュリティグループの作成
+  cloudformationSGRDS:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: cloudformationSGRDS
+      GroupDescription: cloudformationSGRDS
+      VpcId: !ImportValue cloudformation-EC2VPC-id
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: !Ref cloudformationSGEC2
+      Tags:
+        - Key: Name
+          Value: cloudformationSGRDS
+#アウトプットの作成
+Outputs:
+    SGOutput1: 
+      Value: !Ref cloudformationSGEC2
+      Export:
+        Name: cloudformationSGEC2
+    SGOutput2:
+      Value: !Ref cloudformationSGALB
+      Export:
+        Name: cloudformationSGALB
+    SGOutput3:
+      Value: !Ref cloudformationSGRDS
+      Export:
+        Name: cloudformationSGRDS

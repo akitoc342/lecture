@@ -1,0 +1,119 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: VPC template
+Resources:
+#VPCの作成
+    EC2VPC:
+        Type: "AWS::EC2::VPC"
+        Properties:
+            CidrBlock: "10.0.0.0/16"
+            EnableDnsSupport: true
+            EnableDnsHostnames: false
+            InstanceTenancy: "default"
+            Tags: 
+              - Key: "Name"
+                Value: "aws-infra-cloudformation_vpc"
+#インターネットゲートウェイの作成
+    EC2InternetGateway:
+        Type: "AWS::EC2::InternetGateway"
+        Properties:
+            Tags: 
+              - Key: "Name"
+                Value: "aws-infra-cloudformation_IGW"
+#インターネットゲートウェイのアタッチ
+    AttachGateway:
+        Type: "AWS::EC2::VPCGatewayAttachment"
+        Properties:
+            InternetGatewayId: !Ref EC2InternetGateway
+            VpcId: !Ref  EC2VPC
+#publicサブネット1aの作成
+    EC2Subnet:
+        Type: "AWS::EC2::Subnet"
+        Properties:
+            AvailabilityZone: !GetAtt EC2Subnet3.AvailabilityZone
+            CidrBlock: "10.0.10.0/24"
+            VpcId: !Ref EC2VPC
+            MapPublicIpOnLaunch: true
+            Tags: 
+              - Key: "Name"
+                Value: "aws-infra-public-subnet-CF_1a"
+#publicサブネット1cの作成
+    EC2Subnet2:
+        Type: "AWS::EC2::Subnet"
+        Properties:
+            AvailabilityZone: !GetAtt EC2Subnet4.AvailabilityZone
+            CidrBlock: "10.0.11.0/24"
+            VpcId: !Ref EC2VPC
+            MapPublicIpOnLaunch: true
+            Tags: 
+              - Key: "Name"
+                Value: "aws-infra-public-subnet-CF_1c"
+#privateサブネット1aの作成
+    EC2Subnet3:
+        Type: "AWS::EC2::Subnet"
+        Properties:
+            AvailabilityZone: !Sub "ap-northeast-1a"
+            CidrBlock: "10.0.20.0/24"
+            VpcId: !Ref EC2VPC
+            MapPublicIpOnLaunch: false
+            Tags: 
+              - Key: "Name"
+                Value: "aws-infra-private-subnet-CF_1a"
+#privateサブネット1cの作成
+    EC2Subnet4:
+        Type: "AWS::EC2::Subnet"
+        Properties:
+            AvailabilityZone: !Sub "ap-northeast-1c"
+            CidrBlock: "10.0.21.0/24"
+            VpcId: !Ref EC2VPC
+            MapPublicIpOnLaunch: false
+            Tags: 
+              - Key: "Name"
+                Value: "aws-infra-private-subnet-CF_1c"
+#ルートテーブル（publicサブネット用）の作成
+    EC2RouteTable:
+        Type: "AWS::EC2::RouteTable"
+        Properties:
+            VpcId: !Ref EC2VPC
+            Tags: 
+              - Key: "Name"
+                Value: "aws-infra-cloudformation_RT_public"
+    EC2RoutePublic:
+        Type: AWS::EC2::Route
+        Properties:
+            RouteTableId: !Ref EC2RouteTable
+            DestinationCidrBlock: 0.0.0.0/0
+            GatewayId: !Ref EC2InternetGateway
+#パブリックサブネットとルートテーブルの関連付け
+    EC2SubnetRouteTableAssociation:
+        Type: "AWS::EC2::SubnetRouteTableAssociation"
+        Properties:
+            RouteTableId: !Ref EC2RouteTable
+            SubnetId: !Ref EC2Subnet
+
+    EC2SubnetRouteTableAssociation2:
+        Type: "AWS::EC2::SubnetRouteTableAssociation"
+        Properties:
+            RouteTableId: !Ref EC2RouteTable
+            SubnetId: !Ref EC2Subnet2
+#出力
+Outputs:
+    VpcOutput:
+        Value: !Ref EC2VPC
+        Export:
+            Name: cloudformation-EC2VPC-id
+    SubnetOutput1:
+        Value: !Ref EC2Subnet
+        Export:
+            Name: cloudformation-EC2publicSubnet1-id
+    SubnetOutput2:
+        Value: !Ref EC2Subnet2
+        Export:
+            Name: cloudformation-EC2publicSubnet2-id
+    SubnetOutput3:
+        Value: !Ref EC2Subnet3
+        Export:
+            Name: cloudformation-EC2privateSubnet1-id
+    SubnetOutput4:
+        Value: !Ref EC2Subnet4
+        Export:
+            Name: cloudformation-EC2privateSubnet2-id
