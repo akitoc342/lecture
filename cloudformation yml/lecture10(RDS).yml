@@ -44,4 +44,3 @@ Resources:
       Tags:
       - Key: "Name"
         Value: "cloudformation-RDS"
-        
