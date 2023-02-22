@@ -32,3 +32,4 @@ Outputs:
         Value: !Ref WebInstance
         Export:
             Name: !Sub "Cloudformation-EC2ID"
+ 
