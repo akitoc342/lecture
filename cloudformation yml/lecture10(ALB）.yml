@@ -59,5 +59,3 @@ Outputs:
     Value: !Ref LoadBalancerResource
     Export:
       Name: cloudformationALB
-
-      
