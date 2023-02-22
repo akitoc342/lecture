@@ -31,5 +31,5 @@ Outputs:
         Description: EC2 ID
         Value: !Ref WebInstance
         Export:
-            Name: !Sub "Cloudformation-EC2ID"
- 　
+            Name: !Sub "Cloudformation-EC2ID" 
+                                                
