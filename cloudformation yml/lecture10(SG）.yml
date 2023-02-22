@@ -68,3 +68,4 @@ Outputs:
       Value: !Ref cloudformationSGRDS
       Export:
         Name: cloudformationSGRDS
+        
