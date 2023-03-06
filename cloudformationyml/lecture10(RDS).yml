@@ -3,6 +3,7 @@ Description: RDS template
 #ＤＢパスワード
 Parameters:
     DBMasterUserPassword:
+        NoEcho: 'true'
         Default: aki33659
         Type: String
 Resources:
