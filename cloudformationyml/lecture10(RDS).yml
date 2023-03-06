@@ -2,6 +2,10 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: RDS template
 #ＤＢパスワード
 Parameters:
+    MasterUserName:
+        NoEcho: 'true'
+        Default: root
+        Type: String
     MasterUserPassword:
         NoEcho: 'true'
         Default: aki33659
