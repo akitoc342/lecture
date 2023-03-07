@@ -9,7 +9,9 @@ Resources:
   WebInstance:
     Type: AWS::EC2::Instance
     Properties:
-      AvailabilityZone: !Sub ${AWS::Region}a
+      AvailabilityZone: !Select
+        - 0
+        - Fn::GetAZs: !Ref AWS::Region
       InstanceType: t2.micro
       ImageId: ami-06ee4e2261a4dc5c3
       KeyName: !Ref NewKeyPair 
