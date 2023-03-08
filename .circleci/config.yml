@@ -10,7 +10,7 @@ jobs:
       - run:
           name: run cfn-lint
           command: |
-            cfn-lint -i W3002 -t cloudformationyml/*.yml
+            cfn-lint -i W3002 -t cloudformationymlfile/*.yml
 workflows:
   raisetech:
     jobs:
