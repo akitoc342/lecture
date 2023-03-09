@@ -2,9 +2,10 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: RDS template
 #ＤＢパスワード
 Parameters:
-    DBMasterUserPassword:
-        Default: aki33659
-        Type: String
+    MasterUserPassword:
+      NoEcho: 'true'
+      Default: aki33659
+      Type: String
 Resources:
 #サブネットグループ作成
   RDSSubnetGroup:
@@ -27,7 +28,7 @@ Resources:
       Engine: "mysql"
       EngineVersion: "8.0.28"
       MasterUsername: "admin"
-      MasterUserPassword: !Ref 'DBMasterUserPassword'
+      MasterUserPassword: !Ref 'MasterUserPassword'
       DBName: "cloudformationRDS"
       BackupRetentionPeriod: 1
       MultiAZ: false
