@@ -65,7 +65,7 @@ Resources:
         Type: "AWS::EC2::Subnet"
         Properties:
             AvailabilityZone: !Select
-                - 2
+                - 1
                 - Fn::GetAZs: !Ref AWS::Region
             CidrBlock: "10.0.21.0/24"
             VpcId: !Ref EC2VPC
