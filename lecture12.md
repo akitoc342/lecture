@@ -9,7 +9,7 @@
 - Vscodeの拡張機能でもLinterが入れる事が出来ローカルでテンプレートのエラーを確認出来て便利。  
 （コンソールにて```cfn-lint テンプレート.yml```で判定）
 #### 初回失敗画像
-   ![picture 1](images/974a743dbf6cf4c4eb751b214df74a1aba6cd038914c3ebbdd58dbae3b4a60cd.png)  
+   ![picture 1](images/fail1.png)  
 
 初回は指定したパスが間違っており、ymlファイルが見つけられないと指摘を受ける。
 →パスを指定し直して解決
