@@ -1,4 +1,4 @@
-# 13回目、１４回目課題（最終課題）
+# １３回目、１４回目課題（最終課題）
 ## 課題内容  
 - CircleCIのサンプルにServerSpecやAnsibleの処理を追加する。
 - AWS構成図、リポジトリのREADMEを作成する。
@@ -27,6 +27,7 @@
       - [4.1成功画面](#41成功画面)
     - [5.CircleCIパイプライン成功画面](#5circleciパイプライン成功画面)
   - [AWS構成図](#aws構成図)
+  - [リポジトリのREADMEの作成](#リポジトリのreadmeの作成)
   - [感想](#感想)
 
 
@@ -130,9 +131,16 @@ Ansible Vault使い方 〜暗号化のための2つの方法〜 ](https://tech-b
 #### 3.3 AWS ACCESS KEY ID,AWS　SECRET ACCESS KEYのAnsibleへの反映  
 - AnsibleへのACCESS KEY ID、SECRET ACCESS KEYの反映はCircleCIの環境変数を使用した。  
 ```
-echo export ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID >> $BASH_ENV
-echo export SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY >> $BASH_ENV
-source $BASH_ENV
+- name: set environment vars 
+  blockinfile:
+    dest: "/home/ec2-user/.bash_profile"
+    insertafter: EOF
+    content: |
+      export ACCESS_KEY='{{ (lookup('env','ACCESS_KEY_ID')) }}'
+      export SECRET_ACCESS_KEY='{{ (lookup('env','SECRET_ACCESS_KEY')) }}'
+- name: key env setting
+  become_user: ec2-user
+  shell: bash -lc "source ~/.bash_profile"
 ```
 - lookup変数を使用してCircleCIの環境変数を参照する。  
 ```
@@ -184,6 +192,8 @@ end
 ![パイプライン成功](images/パイプライン成功画像.png) 
 ## AWS構成図  
 ![AWS構成図](images/第１３回課題構成図.png) 
+## リポジトリのREADMEの作成
+READMEは[こちらのリポジトリ ](https://github.com/akitoc342/CircleCI/tree/81b2d7cdda2808a37144ad9ec6b585e6c9fbccf7)を確認下さい。
 ## 感想  
 - Ansibleで何をやっても実行できないコマンドがあり、かなりハマりました。  
 どうしても解決しそうに無い場合は別の方法を模索するのも手という事を学んだ。
