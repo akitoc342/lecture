@@ -45,7 +45,7 @@
 executeAnsibleの処理をCircleCIへ追加。
 CircleCIのAdditional SSH KeysへHostNameを設定後表示されたFingerprintを/.circleci/config.ymlへ入力
 ![picture 2](images/CircleCIhostname.png)
-[対象コード](https://github.com/akitoc342/CircleCI/blob/main/.circleci/config.yml) 
+[対象コード](https://github.com/akitoc342/CircleCI/blob/81b2d7cdda2808a37144ad9ec6b585e6c9fbccf7/.circleci/config.yml) 
 
 ### 2.ServerspecでGitのインストール確認を実装
 - Gitのインストール確認のテストを作成しテストの実施
@@ -63,8 +63,8 @@ ruby(rubyインストール)
 ↓  
 mysql（MySQLインストール）  
 ↓  
-appclone（サンプルアプリのclone） 
-↓　 
+appclone（サンプルアプリのclone）  
+↓   
 bundler(bundleインストール)  
 ↓  
 nginx（Nginxインストール）  
@@ -195,7 +195,7 @@ end
 ## リポジトリのREADMEの作成
 READMEは[こちらのリポジトリ ](https://github.com/akitoc342/CircleCI/tree/81b2d7cdda2808a37144ad9ec6b585e6c9fbccf7)を確認下さい。
 ## 感想  
-- Ansibleで何をやっても実行できないコマンドがあり、かなりハマりました。  
-どうしても解決しそうに無い場合は別の方法を模索するのも手という事を学んだ。
+- Ansibleで何をやっても実行できないコマンドがあり、解決出来ずにハマりました。  
+どうしても解決しそうに無い場合は別の方法を模索するのも手という事を今回学習しました。
 - Ansible、CloudFormation、Severspec単独で見ればそれほど複雑では無かったが、CircleCIのパイプラインで一つの流れとして組み込むと値の受け渡しにworkspaceを使用する必要がありかなり苦労した。
-- 変更を加える度にターゲットノードのインスタンスにログイン確認してという方法を取ったのでかなり時間が掛かった。しかし少しずつ変更を確認したことにより、大きな手戻りはする事が無かったのは良かったです。
+- 変更を加える度にターゲットノードのインスタンスにログイン確認してという方法を取ったので、完成までにかなり時間が掛かった。しかし少しずつ変更を確認したことにより、大きな手戻りはする事が無かったのは良かったのではないかと思っています。
