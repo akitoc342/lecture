@@ -121,4 +121,4 @@ Outputs:
         Value: !Ref EC2Subnet4
         Export:
             Name: cloudformation-EC2privateSubnet2-id
-            
+
