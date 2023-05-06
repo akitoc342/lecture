@@ -14,7 +14,8 @@
 (*S3のみ追加で作成)  
 - デプロイ用のアプリは課題用に提供されている[サンプルアプリ](https://github.com/yuta-ushijima/raisetech-live8-sample-app)を使用
 
-- [目次](#目次)
+# 目次
+- [目次]
     - [1.Ansibleの実装](#1ansibleの実装)
     - [2.ServerspecでGitのインストール確認を実装](#2serverspecでgitのインストール確認を実装)
     - [3.Ansibleにサンプルアプリをデプロイするplaybookを作成](#3ansibleにサンプルアプリをデプロイするplaybookを作成)
