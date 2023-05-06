@@ -10,8 +10,8 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       AvailabilityZone: !Select
-        - 0
-        - Fn::GetAZs: !Ref 'AWS::Region'
+          - 0
+          - Fn::GetAZs: !Ref AWS::Region
       InstanceType: t2.micro
       ImageId: ami-06ee4e2261a4dc5c3
       KeyName: !Ref NewKeyPair 
@@ -33,4 +33,4 @@ Outputs:
         Description: EC2 ID
         Value: !Ref WebInstance
         Export:
-            Name: !Sub "Cloudformation-EC2ID"
+            Name: "Cloudformation-EC2ID"

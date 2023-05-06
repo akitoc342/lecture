@@ -4,3 +4,4 @@
 - lecture10 第十回講義課題
 - lecture11 第十一回講義課題
 - lecture12 第十二回課題
+- lecture13,14 第十三回課題
