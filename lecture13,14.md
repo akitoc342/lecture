@@ -14,6 +14,9 @@
 (*S3のみ追加で作成)  
 - デプロイ用のアプリは課題用に提供されている[サンプルアプリ](https://github.com/yuta-ushijima/raisetech-live8-sample-app)を使用
 
+## 完成品コード
+- 完成した各種コードは[別のリポジトリ](https://github.com/akitoc342/CircleCI/tree/81b2d7cdda2808a37144ad9ec6b585e6c9fbccf7)を確認下さい。  
+  
 # 目次
 - [目次]
     - [1.Ansibleの実装](#1ansibleの実装)
