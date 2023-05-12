@@ -34,7 +34,7 @@
 メール通知
 ![UnHealthyアラームOKメール](images/UnHealthyOKメール.png)  
 3. 作成したリソースの内容を見積もって下さい。
-作成した見積りのURLを共有します。
+作成した見積りのURLを共有します。  
 https://calculator.aws/#/estimate?id=b1305a7df0441029daeb3ac3a9e86503c1c33e0d
 4. マネジメントコンソールから現在の利用料を確認して教えて下さい。無料枠で収まっていますか？　
 ![先月の料金の確認](images/先月の料金の確認.png)
