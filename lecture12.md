@@ -14,11 +14,11 @@
 初回は指定したパスが間違っており、ymlファイルが見つけられないと指摘を受ける。
 →パスを指定し直して解決
 #### ２回目失敗画像
-![picture 2](images/a89e94cba64d32bf88d329b54ae3d3da1f131435e0ed95776dd499731933aa31.png)  
+![picture 2](images/fail2.png)  
 Linterでymlファイルをチェックされ、ymlファイルのエラー内容が表示される。
 →検索して該当するエラーをymlファイルを修正してエラーを消して解決
 #### 3回目成功画像
-![picture 3](images/046f8f0aaca1cf185f5b22dd60df349e98b89d206b9ae77cb30f997366301b63.png)  
+![picture 3](images/success.png)  
 無事CircleCIのJobがSuccessになっており、GithubへのCommitが成功している。
 
 ## 学んだ事
