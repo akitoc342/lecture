@@ -1,5 +1,5 @@
-# １３回目、１４回目課題（最終課題）
-## 課題内容  
+# 概要：CircleCIを使用したアプリケーションの自動デプロイ
+## 達成目標  
 - CircleCIのサンプルにServerSpecやAnsibleの処理を追加する。
 - AWS構成図、リポジトリのREADMEを作成する。
 
@@ -10,9 +10,9 @@
 - デプロイされたアプリをテストするServerspecのテストを作成
 
 ### 補足事項
-- CloudFormationのテンプレートは[第１０回課題](https://github.com/akitoc342/lecture/tree/main/cloudformationymlfile)で作成した物を一部訂正して流用
+- CloudFormationのテンプレートは[CloudFormation学習時成果物](https://github.com/akitoc342/lecture/tree/main/cloudformationymlfile)を一部訂正して流用
 (*S3のみ追加で作成)  
-- デプロイ用のアプリは課題用に提供されている[サンプルアプリ](https://github.com/yuta-ushijima/raisetech-live8-sample-app)を使用
+- アプリは提供されている[画像登録アプリ](https://github.com/yuta-ushijima/raisetech-live8-sample-app)を使用
 
 ## 完成品コード
 - 完成した各種コードは[別のリポジトリ](https://github.com/akitoc342/CircleCI/tree/81b2d7cdda2808a37144ad9ec6b585e6c9fbccf7)を確認下さい。  
